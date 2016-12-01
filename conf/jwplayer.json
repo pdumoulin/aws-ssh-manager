@@ -1,0 +1,36 @@
+{
+    "environments" : {
+        "dev" : {
+            "hosts" : [
+                "api-*",
+                "yorkie-*",
+                "greyhound-*",
+                "build-*"
+            ],
+            "elbs" : [
+
+            ]
+        },
+        "stg" : {
+            "hosts" : [
+                "yorkie-*"
+            ],
+            "elbs" : [
+                "LB-API-VPC",
+                "lb-portal-greyhound"
+            ]
+        },
+        "prod" : {
+            "hosts" : [
+                "yorkie-*" ,
+                "www1*",
+                "platform-cron*",
+                "doberman-*"
+            ],
+            "elbs" : [
+                "LB-account-api",
+                "lb-portal-greyhound"
+            ]
+        }
+    }
+}
