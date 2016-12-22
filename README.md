@@ -36,8 +36,29 @@ Script that manages connection profiles for multiple AWS accounts.
     1. List of elbs to query for backend hosts (default is empty array)
 
 ## Run
+Sample .bashrc
 ```
-TODO - add console output
+export SSH_USER='myusername'
+export SSH_CONFIG='/Users/me/aws-ssh-manager/conf/config.json'
+alias s='python ~/aws-ssh-manager/manager.py'
+```
+
+Sample Output:
+```
+[15:52:46] me@mylaptop ~/aws-ssh-manager $ python manager.py
+Available environments:
+stg
+prod
+dev
+[15:52:48] me@mylaptop ~/aws-ssh-manager $ python manager.py prod
+1: api-01.example.com
+2: api-02.example.com
+3: api-03.example.com
+4: worker-034514bd8d3a9fb73.example.com
+5: worker-1216a91d.example.com
+6: worker-70f3ade8.example.com
+7: cron-01.example.com
+Select host to SSH into:
 ```
 
 ## References
