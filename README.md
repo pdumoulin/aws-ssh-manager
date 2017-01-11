@@ -13,11 +13,11 @@ Script that manages connection profiles for multiple AWS accounts.
   Example Credentials File:
   ```
   [dev]
-  aws_access_key=devkeyhere
+  aws_access_key_id=devkeyhere
   aws_secret_access_key=devsecrethere
 
   [prod]
-  aws_access_key=prodkeyhere
+  aws_access_key_id=prodkeyhere
   aws_secret_access_key=prodsecrethere
   ```
 
