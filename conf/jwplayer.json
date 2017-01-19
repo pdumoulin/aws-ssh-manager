@@ -4,11 +4,11 @@
             "hosts" : [
                 "api-*",
                 "yorkie-*",
-                "greyhound-*",
                 "build-*"
             ],
             "elbs" : [
-
+                "greyhound-public",
+                "greyhound-internal"
             ]
         },
         "stg" : {
@@ -17,7 +17,8 @@
             ],
             "elbs" : [
                 "LB-API-VPC",
-                "lb-portal-greyhound"
+                "greyhound-internal",
+                "greyhound-public"
             ]
         },
         "prod" : {
@@ -29,7 +30,9 @@
             ],
             "elbs" : [
                 "LB-account-api",
-                "greyhound-internal"
+                "greyhound-internal",
+                "greyhound-public",
+                "lb-portal-greyhound"
             ]
         }
     }

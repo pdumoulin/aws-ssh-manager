@@ -38,13 +38,34 @@ def main():
 
     # get all hostanmes into an ordered list
     hostnames = []
-    hostnames = hostnames + fetcher.get_elb_backend_hosts(elbs)
     hostnames = hostnames + fetcher.get_instances(hosts)
     hostnames.sort()
 
-    # display available hostnames
-    for index,hostname in enumerate(hostnames):
-        print "%s: %s" % (index + 1, hostname)
+    elb_hostnames = []
+    elb_hostnames = fetcher.get_elb_backend_hosts(elbs)
+    elb_hostnames = sorted(elb_hostnames, key=lambda k: k['name'])
+
+    options = []
+    index = 1
+    def add_option(hostname):
+        index = len(options) + 1
+        print "%s: %s" % (index, hostname)
+        options.append(hostname)
+
+    # display available hostnames with no elb
+    print ""
+    for hostname in hostnames:
+        add_option(hostname)
+    print ""
+
+    # display available hostnames under elbs and elb name
+    for elb in elb_hostnames:
+        print "ELB: %s" % elb['name']
+        hosts = elb['hosts']
+        hosts.sort()
+        for hostname in hosts:
+            add_option(hostname)
+        print ""
 
     # determine the SSH user to use
     ssh_user = None
@@ -55,7 +76,11 @@ def main():
 
     # make a selection and SSH into it
     host_index = raw_input("Select host to SSH into: ")
-    selected_host = hostnames[int(host_index) - 1]
+    try:
+        selected_host = options[int(host_index) - 1]
+    except:
+        print "FATAL ERROR: Could not find host at index %s!" % host_index
+        exit()
     subprocess.call(["ssh", "-v", "%s@%s" % (ssh_user, selected_host)])
 
 class Fetcher(object):
@@ -89,14 +114,19 @@ class Fetcher(object):
     def get_elb_backend_hosts(self, elb_names):
         if len(elb_names) == 0:
             return []
-        hostnames = []
+        elbs = []
         result = self.elb.describe_load_balancers(LoadBalancerNames=elb_names)
         for load_balancer in result['LoadBalancerDescriptions']:
+            elb = {
+                'name'  : load_balancer['LoadBalancerName'],
+                'hosts' : []
+            }
             instance_ids = [a['InstanceId'] for a in load_balancer['Instances']]
             if len(instance_ids) > 0:
                 result = self.ec2.describe_instances(InstanceIds=instance_ids)
-                hostnames = hostnames + self._get_tag_values(result['Reservations'], 'Name')
-        return hostnames
+                elb['hosts'].extend(self._get_tag_values(result['Reservations'], 'Name'))
+            elbs.append(elb)
+        return elbs
 
 if __name__ == '__main__':
     main()
