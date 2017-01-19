@@ -51,13 +51,17 @@ stg
 prod
 dev
 [15:52:48] me@mylaptop ~/aws-ssh-manager $ python manager.py prod
-1: api-01.example.com
-2: api-02.example.com
-3: api-03.example.com
-4: worker-034514bd8d3a9fb73.example.com
-5: worker-1216a91d.example.com
-6: worker-70f3ade8.example.com
-7: cron-01.example.com
+
+1: worker-034514bd8d3a9fb73.example.com
+2: worker-1216a91d.example.com
+3: worker-70f3ade8.example.com
+4: cron-01.example.com
+
+ELB: my-app-elb
+5: api-01.example.com
+6: api-02.example.com
+7: api-03.example.com
+
 Select host to SSH into:
 ```
 
