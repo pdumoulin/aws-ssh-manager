@@ -31,8 +31,7 @@
             "elbs" : [
                 "LB-account-api",
                 "greyhound-internal",
-                "greyhound-public",
-                "lb-portal-greyhound"
+                "greyhound-public"
             ]
         }
     }
