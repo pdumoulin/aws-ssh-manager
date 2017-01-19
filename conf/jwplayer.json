@@ -29,7 +29,7 @@
             ],
             "elbs" : [
                 "LB-account-api",
-                "lb-portal-greyhound"
+                "greyhound-internal"
             ]
         }
     }
