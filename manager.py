@@ -93,8 +93,9 @@ class Fetcher(object):
         result = self.elb.describe_load_balancers(LoadBalancerNames=elb_names)
         for load_balancer in result['LoadBalancerDescriptions']:
             instance_ids = [a['InstanceId'] for a in load_balancer['Instances']]
-            result = self.ec2.describe_instances(InstanceIds=instance_ids)
-            hostnames = hostnames + self._get_tag_values(result['Reservations'], 'Name')
+            if len(instance_ids) > 0:
+                result = self.ec2.describe_instances(InstanceIds=instance_ids)
+                hostnames = hostnames + self._get_tag_values(result['Reservations'], 'Name')
         return hostnames
 
 if __name__ == '__main__':
