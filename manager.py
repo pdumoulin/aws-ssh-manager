@@ -46,7 +46,6 @@ def main():
     elb_hostnames = sorted(elb_hostnames, key=lambda k: k['name'])
 
     options = []
-    index = 1
     def add_option(hostname):
         index = len(options) + 1
         print "%s: %s" % (index, hostname)
