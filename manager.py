@@ -1,4 +1,5 @@
 
+import time
 import os
 import sys
 import subprocess
@@ -36,14 +37,22 @@ def main():
     # http://boto3.readthedocs.io/en/latest/guide/configuration.html#shared-credentials-file
     fetcher = Fetcher(profile, region)
 
+    start_time = time.time()
+    print "Querying..."
+
     # get all hostanmes into an ordered list
     hostnames = []
     hostnames = hostnames + fetcher.get_instances(hosts)
     hostnames.sort()
 
+    # get all elbs and hosts in an ordered list
     elb_hostnames = []
     elb_hostnames = fetcher.get_elb_backend_hosts(elbs)
     elb_hostnames = sorted(elb_hostnames, key=lambda k: k['name'])
+
+    elapsed_time = time.time() - start_time
+    print "Query took %s seconds" % elapsed_time
+    print ""
 
     options = []
     def add_option(hostname):
@@ -52,7 +61,6 @@ def main():
         options.append(hostname)
 
     # display available hostnames with no elb
-    print ""
     for hostname in hostnames:
         add_option(hostname)
     print ""
