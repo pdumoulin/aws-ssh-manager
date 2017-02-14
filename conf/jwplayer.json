@@ -2,13 +2,13 @@
     "environments" : {
         "dev" : {
             "hosts" : [
-                "api-*",
                 "yorkie-*",
                 "build-*"
             ],
             "elbs" : [
                 "greyhound-public",
-                "greyhound-internal"
+                "greyhound-internal",
+                "portal-api-dev"
             ]
         },
         "stg" : {
@@ -18,7 +18,8 @@
             "elbs" : [
                 "LB-API-VPC",
                 "greyhound-internal",
-                "greyhound-public"
+                "greyhound-public",
+                "portal-api-stg"
             ]
         },
         "prod" : {
@@ -31,7 +32,8 @@
             "elbs" : [
                 "LB-account-api",
                 "greyhound-internal",
-                "greyhound-public"
+                "greyhound-public",
+                "portal-api"
             ]
         }
     }
