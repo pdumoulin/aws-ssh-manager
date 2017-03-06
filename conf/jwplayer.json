@@ -19,10 +19,11 @@
                 "yorkie-*"
             ],
             "elbs" : [
-                "LB-API-VPC",
                 "greyhound-internal",
                 "greyhound-public",
-                "portal-api-stg"
+                "portal-api-stg",
+                "api-gateway-stg",
+                "rottweiler-stg"
             ]
         },
         "prod" : {
@@ -33,7 +34,6 @@
                 "doberman-*"
             ],
             "elbs" : [
-                "LB-account-api",
                 "greyhound-internal",
                 "greyhound-public",
                 "portal-api"
