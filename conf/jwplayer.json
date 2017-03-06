@@ -8,7 +8,10 @@
             "elbs" : [
                 "greyhound-public",
                 "greyhound-internal",
-                "portal-api-dev"
+                "portal-api-dev",
+                "api-gateway-dev",
+                "rottweiler-dev",
+                "spaniel"
             ]
         },
         "stg" : {
