@@ -3,7 +3,8 @@
         "dev" : {
             "hosts" : [
                 "yorkie-*",
-                "build-*"
+                "build-*",
+                "mrss"
             ],
             "elbs" : [
                 "greyhound-public",
@@ -36,6 +37,8 @@
             "elbs" : [
                 "greyhound-internal",
                 "greyhound-public",
+                "api-gateway-prd",
+                "rottweiler-prd",
                 "portal-api"
             ]
         }
