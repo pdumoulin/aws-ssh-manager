@@ -24,7 +24,8 @@
                 "greyhound-public",
                 "portal-api-stg",
                 "api-gateway-stg",
-                "rottweiler-stg"
+                "rottweiler-stg",
+                "spaniel"
             ]
         },
         "prod" : {
