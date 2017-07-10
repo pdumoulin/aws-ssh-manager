@@ -4,14 +4,16 @@
             "hosts" : [
                 "yorkie-*",
                 "build-*",
-                "mrss"
+                "mrss",
+                "spaniel-cron-*",
+                "spaniel-worker-*",
+                "salt-dev.*"
             ],
             "elbs" : [
                 "greyhound-public",
                 "greyhound-internal",
                 "portal-api-dev",
                 "api-gateway-dev",
-                "rottweiler-dev",
                 "spaniel"
             ]
         },
@@ -40,7 +42,8 @@
                 "greyhound-public",
                 "api-gateway-prd",
                 "rottweiler-prd",
-                "portal-api"
+                "portal-api",
+                "spaniel"
             ]
         }
     }
