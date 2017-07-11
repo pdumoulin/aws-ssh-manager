@@ -26,7 +26,6 @@
                 "greyhound-public",
                 "portal-api-stg",
                 "api-gateway-stg",
-                "rottweiler-stg",
                 "spaniel"
             ]
         },
@@ -41,7 +40,6 @@
                 "greyhound-internal",
                 "greyhound-public",
                 "api-gateway-prd",
-                "rottweiler-prd",
                 "portal-api",
                 "spaniel"
             ]
