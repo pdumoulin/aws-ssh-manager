@@ -13,7 +13,6 @@
                 "greyhound-public",
                 "greyhound-internal",
                 "portal-api-dev",
-                "api-gateway-dev",
                 "spaniel"
             ]
         },
@@ -25,7 +24,6 @@
                 "greyhound-internal",
                 "greyhound-public",
                 "portal-api-stg",
-                "api-gateway-stg",
                 "spaniel"
             ]
         },
@@ -39,7 +37,6 @@
             "elbs" : [
                 "greyhound-internal",
                 "greyhound-public",
-                "api-gateway-prd",
                 "portal-api",
                 "spaniel"
             ]
