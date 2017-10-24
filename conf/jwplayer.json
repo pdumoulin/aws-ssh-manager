@@ -10,8 +10,6 @@
                 "salt-dev.*"
             ],
             "elbs" : [
-                "greyhound-public",
-                "greyhound-internal",
                 "portal-api-dev",
                 "spaniel"
             ]
@@ -21,8 +19,6 @@
                 "yorkie-*"
             ],
             "elbs" : [
-                "greyhound-internal",
-                "greyhound-public",
                 "portal-api-stg",
                 "spaniel"
             ]
@@ -30,13 +26,11 @@
         "prod" : {
             "hosts" : [
                 "yorkie-*" ,
-                "www1*",
                 "platform-cron*",
                 "doberman-*"
             ],
             "elbs" : [
-                "greyhound-internal",
-                "greyhound-public",
+                "www1",
                 "portal-api",
                 "spaniel"
             ]
