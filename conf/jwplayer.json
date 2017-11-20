@@ -5,13 +5,10 @@
                 "yorkie-*",
                 "build-*",
                 "mrss",
-                "spaniel-cron-*",
-                "spaniel-worker-*",
                 "salt-dev.*"
             ],
             "elbs" : [
-                "portal-api-dev",
-                "spaniel"
+                "portal-api-dev"
             ]
         },
         "stg" : {
@@ -19,8 +16,7 @@
                 "yorkie-*"
             ],
             "elbs" : [
-                "portal-api-stg",
-                "spaniel"
+                "portal-api-stg"
             ]
         },
         "prod" : {
@@ -31,8 +27,7 @@
             ],
             "elbs" : [
                 "www1",
-                "portal-api",
-                "spaniel"
+                "portal-api"
             ]
         }
     }
