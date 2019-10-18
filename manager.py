@@ -16,16 +16,16 @@ def main():
 
     # load in simple params
     if len(sys.argv) < 2:
-        print "Available environments: "
+        print("Available environments: ")
         for key in environments:
-            print key
+            print(key)
         exit()
     else:
         profile = sys.argv[1]
 
     # validate environment
     if profile not in environments:
-        print "Environment '%s' not found!" % profile
+        print("Environment '%s' not found!" % profile)
         exit()
 
     # read in config data
@@ -38,7 +38,7 @@ def main():
     fetcher = Fetcher(profile, region)
 
     start_time = time.time()
-    print "Querying..."
+    print("Querying...")
 
     # get all hostanmes into an ordered list
     hostnames = []
@@ -51,46 +51,46 @@ def main():
     elb_hostnames = sorted(elb_hostnames, key=lambda k: k['name'])
 
     elapsed_time = time.time() - start_time
-    print "Query took %s seconds" % elapsed_time
-    print ""
+    print("Query took %s seconds" % elapsed_time)
+    print("")
 
     options = []
     def add_option(hostname):
         index = len(options) + 1
-        print "%s: %s" % (index, hostname)
+        print("%s: %s" % (index, hostname))
         options.append(hostname)
 
     # display available hostnames with no elb
     for hostname in hostnames:
         add_option(hostname)
-    print ""
+    print("")
 
     # display available hostnames under elbs and elb name
     for elb in elb_hostnames:
-        print "ELB: %s" % elb['name']
+        print("ELB: %s" % elb['name'])
         hosts = elb['hosts']
         hosts.sort()
         for hostname in hosts:
             add_option(hostname)
-        print ""
+        print("")
 
     # determine the SSH user to use
     ssh_user = None
     if 'SSH_USER' in os.environ:
         ssh_user = os.environ['SSH_USER']
     else:
-        ssh_user = raw_input("SSH User: ")
+        ssh_user = input("SSH User: ")
 
     # make a selection and SSH into it
-    host_index = raw_input("Select host to SSH into: ")
+    host_index = input("Select host to SSH into: ")
     try:
         selected_host = options[int(host_index) - 1]
-    except:
-        print "FATAL ERROR: Could not find host at index %s!" % host_index
+    except:  # pylint: disable=bare-except
+        print("FATAL ERROR: Could not find host at index %s!" % host_index)
         exit()
     subprocess.call(["ssh", "-v", "%s@%s" % (ssh_user, selected_host)])
 
-class Fetcher(object):
+class Fetcher:
 
     def __init__(self, profile, region):
         session = boto3.Session(region_name=region, profile_name=profile)
@@ -109,17 +109,17 @@ class Fetcher(object):
 
     # get all instances with name tags matching
     def get_instances(self, names):
-        if len(names) == 0:
+        if not names:
             return []
         result = self.ec2.describe_instances(Filters=[
-            { 'Name' : 'tag-value' , 'Values' : names },
-            { 'Name' : 'tag-key' , 'Values' : ['Name'] }
+            {'Name' : 'tag-value', 'Values' : names},
+            {'Name' : 'tag-key', 'Values' : ['Name']}
         ])
         return self._get_tag_values(result['Reservations'], 'Name')
 
     # get all hostnames of instances behind an elb
     def get_elb_backend_hosts(self, elb_names):
-        if len(elb_names) == 0:
+        if not elb_names:
             return []
         elbs = []
         result = self.elb.describe_load_balancers(LoadBalancerNames=elb_names)
@@ -129,7 +129,7 @@ class Fetcher(object):
                 'hosts' : []
             }
             instance_ids = [a['InstanceId'] for a in load_balancer['Instances']]
-            if len(instance_ids) > 0:
+            if instance_ids:
                 result = self.ec2.describe_instances(InstanceIds=instance_ids)
                 elb['hosts'].extend(self._get_tag_values(result['Reservations'], 'Name'))
             elbs.append(elb)
